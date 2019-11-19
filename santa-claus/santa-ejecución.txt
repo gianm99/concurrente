@@ -1,0 +1,138 @@
+--------> Santa says: I'm tired
+--------> Santa says: I'm going to sleep
+                COMET here!
+                Reindeer COMET arrives  
+                DANCER here!
+                RUDOLPH here!
+                Reindeer DANCER arrives 
+                Reindeer RUDOLPH arrives
+                DASHER here!
+                Reindeer DASHER arrives 
+                VIXEN here!
+                Reindeer VIXEN arrives  
+                DONDER here!
+                Reindeer DONDER arrives
+                BLITZEN here!
+                Reindeer BLITZEN arrives
+                PRANCER here!
+                Reindeer PRANCER arrives
+                CUPID here!
+                Reindeer CUPID I'm the 9 
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: I'm going to sleep 
+                COMET ready and hitched
+                Reindeer COMET ends
+                DANCER ready and hitched
+                DONDER ready and hitched
+                Reindeer DONDER ends
+Hi I am the elf Tauriel
+Elf Tauriel says: I have a question, I'm the 1 waiting...
+                PRANCER ready and hitched
+                Reindeer DANCER ends
+                CUPID ready and hitched
+                Reindeer CUPID ends
+Hi I am the elf Galadriel
+                Reindeer PRANCER ends
+                BLITZEN ready and hitched
+Hi I am the elf Elrond
+                VIXEN ready and hitched
+Hi I am the elf Legolas
+Hi I am the elf Imryll
+                Reindeer BLITZEN ends
+Hi I am the elf Chaenath
+Elf Galadriel says: I have a question, I'm the 2 waiting...
+                DASHER ready and hitched
+Hi I am the elf Arwen
+                RUDOLPH ready and hitched
+Elf Elrond says: I have a question, I'm the 3 waiting SANTAAA!
+                Reindeer DASHER ends
+Hi I am the elf Esiyae
+                Reindeer VIXEN ends
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+--------> Santa helps the elf 1 of 3
+--------> Santa helps the elf 2 of 3
+Elf Legolas says: I have a question, I'm the 1 waiting...
+The elf Tauriel got help from Santa
+--------> Santa helps the elf 3 of 3
+The elf Galadriel got help from Santa
+Hi I am the elf Hycis
+--------> Santa ends turn 1
+The elf Elrond got help from Santa
+Elf Imryll says: I have a question, I'm the 2 waiting...
+                Reindeer RUDOLPH ends
+--------> Santa says: I'm going to sleep
+Elf Arwen says: I have a question, I'm the 3 waiting SANTAAA!
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+Elf Chaenath says: I have a question, I'm the 1 waiting...
+Elf Esiyae says: I have a question, I'm the 2 waiting...
+Elf Tauriel says: I have a question, I'm the 3 waiting SANTAAA!
+--------> Santa helps the elf 1 of 3
+--------> Santa helps the elf 2 of 3
+The elf Legolas got help from Santa
+--------> Santa helps the elf 3 of 3
+The elf Imryll got help from Santa
+--------> Santa ends turn 2
+The elf Arwen got help from Santa
+--------> Santa says: I'm going to sleep
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+--------> Santa helps the elf 1 of 3
+--------> Santa helps the elf 2 of 3
+--------> Santa helps the elf 3 of 3
+Elf Galadriel says: I have a question, I'm the 1 waiting...
+The elf Chaenath got help from Santa
+--------> Santa ends turn 3
+The elf Tauriel got help from Santa
+The elf Esiyae got help from Santa
+--------> Santa says: I'm going to sleep
+Elf Tauriel ends
+Elf Hycis says: I have a question, I'm the 2 waiting...
+Elf Elrond says: I have a question, I'm the 3 waiting SANTAAA!
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+Elf Legolas says: I have a question, I'm the 1 waiting...
+--------> Santa helps the elf 1 of 3
+--------> Santa helps the elf 2 of 3
+--------> Santa helps the elf 3 of 3
+The elf Legolas got help from Santa
+The elf Hycis got help from Santa
+The elf Elrond got help from Santa
+Elf Elrond ends
+--------> Santa ends turn 4
+Elf Legolas ends
+Elf Imryll says: I have a question, I'm the 2 waiting...
+--------> Santa says: I'm going to sleep
+Elf Arwen says: I have a question, I'm the 3 waiting SANTAAA!
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+--------> Santa helps the elf 1 of 3
+Elf Esiyae says: I have a question, I'm the 1 waiting...
+--------> Santa helps the elf 2 of 3
+The elf Galadriel got help from Santa
+Elf Chaenath says: I have a question, I'm the 2 waiting...
+--------> Santa helps the elf 3 of 3
+The elf Imryll got help from Santa
+Elf Galadriel ends
+Elf Hycis says: I have a question, I'm the 3 waiting SANTAAA!
+Elf Imryll ends
+The elf Arwen got help from Santa
+Elf Arwen ends
+--------> Santa ends turn 5
+--------> Santa says: I'm going to sleep
+--------> Santa says: I'm awake ho ho ho!
+--------> Santa says: What is the problem?
+--------> Santa helps the elf 1 of 3
+--------> Santa helps the elf 2 of 3
+The elf Esiyae got help from Santa
+The elf Chaenath got help from Santa
+Elf Esiyae ends
+Elf Chaenath ends
+--------> Santa helps the elf 3 of 3
+--------> Santa ends turn 6
+The elf Hycis got help from Santa
+--------> Santa ends
+Elf Hycis ends
+
+C:\Users\gianm>
