@@ -1,6 +1,7 @@
 # Gian Lucas Martín Chamorro
 import threading
 import time
+import random
 
 TURNS = 6  # number of times Santa has to answer the elves' questions
 LOADS = 1  # number of times Santa has to load the toys
@@ -11,7 +12,7 @@ REINDEERS = 9  # number of reindeers
 DELIVERIES = 1  # number of deliveries to be made
 reindeersWaiting = 0  # number of reindeers waiting
 reindeers = threading.Semaphore(0)  # permission to wait to be hitched by santa
-reindeersMutex = threading.Lock()  # mutual exclusion for reindeersWaiting
+reindeersMutex = threading.Semaphore(1) # mutual exclusion for reindeersWaiting
 reindeers_list = {"RUDOLPH", "BLITZEN", "DONDER", "CUPID", "COMET",
                   "VIXEN", "PRANCER", "DANCER", "DASHER"}
 
@@ -21,88 +22,124 @@ ELF_GROUP = 3  # size of waiting group
 QUESTIONS = 2  # number of questions to ask to santa
 elvesWaiting = 0  # number of elves waiting
 elves = threading.Semaphore(0)  # permission to wait to be attended by santa
-elvesMutex = threading.Lock()  # mutual exclusion for elvesWaiting
+elvesMutex = threading.Semaphore(1)  # mutual exclusion for elvesWaiting
 elfGroup = threading.Semaphore(1)  # permission to wait in a group
 elves_list = {"Chaenath", "Elrond", "Hycis", "Imryll", "Galadriel",
               "Arwen", "Tauriel", "Esiyae", "Legolas"}
 
+TIME_SLEEP_SANTA = 2
+TIME_LOAD = 3
+TIME_HOLIDAYS = 4
+TIME_DELIVER = 3
+TIME_WORK = 3
+TIME_HELP = 1
+
 
 def santa():
     global reindeersWaiting, elvesWaiting
-    tu=0
-    lo=0
+    turns = 0
+    loads = 0
 
     print("--------> Santa says: I'm tired")
-    while tu < TURNS or lo < LOADS:
+    while turns < TURNS or loads < LOADS:
         print("--------> Santa says: I'm going to sleep")
         # sleepSanta()
         wakeUp.acquire()
         print("--------> Santa says: I'm awake ho ho ho!")
         if reindeersWaiting == REINDEERS:
-            with reindeersMutex:
-                reindeersWaiting = 0
-            # load()
+            print("--------> Santa says: Toys are ready!")
+            reindeersMutex.acquire()
+            reindeersWaiting = 0
+            reindeersMutex.release()
+            print("--------> Santa loads the toys")
+            load()
+            print("--------> Santa says: Until next Christmas!")
             for i in range(REINDEERS):
                 reindeers.release()
-            lo += 1
+            loads += 1
         else:
-            with elvesMutex:
-                elvesWaiting = 0
-            elfGroup.release()
+            elvesMutex.acquire()
+            elvesWaiting = 0
+            elvesMutex.release()
             print("--------> Santa says: What is the problem?")
             for i in range(ELF_GROUP):
                 print("--------> Santa helps the elf {} of 3".format(i+1))
-                # help()
                 elves.release()
-            tu += 1
-            print("--------> Santa ends turn {}".format(tu))
+            turns += 1
+            print("--------> Santa ends turn {}".format(turns))
+            elfGroup.release()
     print("--------> Santa ends")
 
 
 def elf():
     global elvesWaiting
-    
-    print("Hi I am the elf {}".format(threading.currentThread().getName()))
-    for i in range(QUESTIONS):
-        elfGroup.acquire()
-        with elvesMutex:
-            elvesWaiting += 1
-            if elvesWaiting == 3:
-                print("Elf {} says: I have a question, I'm the 3 waiting SANTAAA!".format(
-                    threading.currentThread().getName()))
-                wakeUp.release()
-            else:
-                print("Elf {} says: I have a question, I'm the {} waiting...".format(
-                    threading.currentThread().getName(), elvesWaiting))
-                elfGroup.release()
-        elves.acquire()
-        print("The elf {} got help from Santa".format(
-            threading.currentThread().getName()))
-        # work()
 
-    print("Elf {} ends".format(threading.currentThread().getName()))
+    name = threading.currentThread().getName()
+    print("Hi I am the elf {}".format(name))
+    for i in range(QUESTIONS):
+        work()
+        elfGroup.acquire()
+        elvesMutex.acquire()
+        elvesWaiting += 1
+        if elvesWaiting == 3:
+            elvesMutex.release()
+            print("Elf {} says: I have a question, I'm the 3 waiting SANTAAA!".format(name))
+            wakeUp.release()
+        else:
+            elvesMutex.release()
+            print("Elf {} says: I have a question, I'm the {} waiting...".format(name, elvesWaiting))
+            elfGroup.release()
+        elves.acquire()
+        print("The elf {} is getting help".format(name))
+        getHelp()
+        # work()
+    print("Elf {} ends".format(name))
 
 
 def reindeer():
     global reindeersWaiting
 
-    print("\t\t{} here!".format(threading.currentThread().getName()))
+    name = threading.currentThread().getName()
+    print("\t\t{} here!".format(name))
     for i in range(DELIVERIES):
-        # holidays()
-        with reindeersMutex:
-            reindeersWaiting += 1
-            if reindeersWaiting == 9:
-                print("\t\tReindeer {} I'm the 9".format(
-                    threading.currentThread().getName()))
-                wakeUp.release()
-            else:
-                print("\t\tReindeer {} arrives".format(
-                    threading.currentThread().getName()))
+        holidays()
+        reindeersMutex.acquire()
+        reindeersWaiting += 1
+        if reindeersWaiting == 9:
+            reindeersMutex.release()
+            print("\t\tReindeer {} I'm the 9".format(name))
+            wakeUp.release()
+        else:
+            reindeersMutex.release()
+            print("\t\tReindeer {} arrives".format(name))
         reindeers.acquire()
-        print("\t\t{} ready and hitched".format(
-            threading.currentThread().getName()))
-        # deliverToys()
-    print("\t\tReindeer {} ends".format(threading.currentThread().getName()))
+        print("\t\t{} ready and hitched".format(name))
+        deliverToys()
+    print("\t\tReindeer {} ends".format(name))
+
+
+def deliverToys():
+    time.sleep(random.uniform(TIME_DELIVER,TIME_DELIVER+2))
+
+
+def work():
+    time.sleep(random.uniform(TIME_WORK,TIME_WORK+2))
+
+
+def getHelp():
+    time.sleep(random.uniform(TIME_HELP,TIME_HELP+2))
+
+
+def sleepSanta():
+    time.sleep(random.uniform(TIME_SLEEP_SANTA,TIME_SLEEP_SANTA+2))
+
+
+def load():
+    time.sleep(random.uniform(TIME_LOAD,TIME_LOAD+2))
+
+
+def holidays():
+    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+2))
 
 
 def main():
