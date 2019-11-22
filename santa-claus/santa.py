@@ -28,12 +28,11 @@ elves_list = {"Chaenath", "Elrond", "Hycis", "Imryll", "Galadriel",
               "Arwen", "Tauriel", "Esiyae", "Legolas"}
 
 TIME_SLEEP_SANTA = 2
-TIME_LOAD = 3
+TIME_LOAD = 2
 TIME_HOLIDAYS = 4
 TIME_DELIVER = 3
 TIME_WORK = 3
 TIME_HELP = 1
-
 
 def santa():
     global reindeersWaiting, elvesWaiting
@@ -43,7 +42,6 @@ def santa():
     print("--------> Santa says: I'm tired")
     while turns < TURNS or loads < LOADS:
         print("--------> Santa says: I'm going to sleep")
-        # sleepSanta()
         wakeUp.acquire()
         print("--------> Santa says: I'm awake ho ho ho!")
         if reindeersWaiting == REINDEERS:
@@ -52,7 +50,7 @@ def santa():
             reindeersWaiting = 0
             reindeersMutex.release()
             print("--------> Santa loads the toys")
-            load()
+            loadToys()
             print("--------> Santa says: Until next Christmas!")
             for i in range(REINDEERS):
                 reindeers.release()
@@ -64,6 +62,7 @@ def santa():
             print("--------> Santa says: What is the problem?")
             for i in range(ELF_GROUP):
                 print("--------> Santa helps the elf {} of 3".format(i+1))
+                helpElf()
                 elves.release()
             turns += 1
             print("--------> Santa ends turn {}".format(turns))
@@ -127,14 +126,12 @@ def work():
 
 
 def getHelp():
-    time.sleep(random.uniform(TIME_HELP,TIME_HELP+2))
+    time.sleep(TIME_HELP)
 
+def helpElf():
+    time.sleep(TIME_HELP)
 
-def sleepSanta():
-    time.sleep(random.uniform(TIME_SLEEP_SANTA,TIME_SLEEP_SANTA+2))
-
-
-def load():
+def loadToys():
     time.sleep(random.uniform(TIME_LOAD,TIME_LOAD+2))
 
 
