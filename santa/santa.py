@@ -86,12 +86,11 @@ def elf():
             wakeUp.release()
         else:
             elvesMutex.release()
-            print("Elf {} says: I have a question, I'm the {} waiting...".format(name, elvesWaiting))
             elfGroup.release()
+            print("Elf {} says: I have a question, I'm the {} waiting...".format(name, elvesWaiting))
         elves.acquire()
         print("The elf {} is getting help".format(name))
         getHelp()
-        # work()
     print("Elf {} ends".format(name))
 
 
