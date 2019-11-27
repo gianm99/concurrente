@@ -30,7 +30,7 @@ def bear():
         print("Bear: Honey jar is empty")
         honeyJar = 0
         notFull.release()   # Honey jar is empty
-
+        
 def bee():
     global honeyJar
 
