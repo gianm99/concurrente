@@ -11,8 +11,8 @@ wakeUp = threading.Semaphore(0)
 REINDEERS = 9  # number of reindeers
 DELIVERIES = 1  # number of deliveries to be made
 reindeersWaiting = 0  # number of reindeers waiting
-reindeers = threading.Semaphore(0)  # permission to wait to be hitched by santa
-reindeersGroup = threading.Semaphore(1) # mutual exclusion for reindeersWaiting
+reindeers = threading.Semaphore(0)  # permission to wait for santa
+reindeersGroup = threading.Semaphore(1) # permission to wait in a group
 reindeers_list = {"RUDOLPH", "BLITZEN", "DONDER", "CUPID", "COMET",
                   "VIXEN", "PRANCER", "DANCER", "DASHER"}
 
@@ -28,7 +28,7 @@ elves_list = {"Chaenath", "Elrond", "Hycis", "Imryll", "Galadriel",
 
 TIME_SLEEP_SANTA = 1
 TIME_LOAD = 1
-TIME_HOLIDAYS = 5
+TIME_HOLIDAYS = 7
 TIME_DELIVER = 4
 TIME_WORK = 1
 TIME_HELP = 1
@@ -47,26 +47,23 @@ def santa():
         if reindeersWaiting == REINDEERS:
             print("--------> Santa says: Toys are ready!")
             print("--------> Santa loads the toys")
-            loadToys()
-            # reindeersGroup.acquire()
-            reindeersWaiting = 0
-            # reindeersGroup.release()
-            print("--------> Santa says: Until next Christmas!")
             for i in range(REINDEERS):
                 reindeers.release()
+                loadToys()
+            reindeersWaiting = 0
+            print("--------> Santa says: Until next Christmas!")
+            reindeersGroup.release()
             loads += 1
         else:
             print("--------> Santa says: What is the problem?")
             for i in range(ELF_GROUP):
-                print("--------> Santa helps the elf {} of 3".format(i+1))
-                helpElf()
+                print("--------> Santa is helping the elf {} of 3".format(i+1))
                 elves.release()
-            # elvesMutex.acquire()
+                helpElf()
             elvesWaiting = 0
-            # elvesMutex.release()
-            turns += 1
-            print("--------> Santa ends turn {}".format(turns))
+            print("--------> Santa ends turn {}".format(turns+1))
             elfGroup.release()
+            turns += 1
     print("--------> Santa ends")
 
 
@@ -77,11 +74,11 @@ def elf():
     print("Hi I am the elf {}".format(name))
     for i in range(QUESTIONS):
         work()
-        elfGroup.acquire()  # acquire
+        elfGroup.acquire()
         elvesWaiting += 1
         if elvesWaiting < 3:
-            elfGroup.release()  #release
             print("Elf {} says: I have a question, I'm the {} waiting...".format(name, elvesWaiting))
+            elfGroup.release()
         else:
             print("Elf {} says: I have a question, I'm the 3 waiting SANTAAA!".format(name))
             wakeUp.release()
@@ -104,24 +101,18 @@ def reindeer():
             reindeersGroup.release()
             print("\t\tReindeer {} arrives".format(name))
         else:
-            # reindeersGroup.release()
             print("\t\tReindeer {} I'm the 9".format(name))
             wakeUp.release()
         reindeers.acquire()
+        loadToys()
         print("\t\t{} ready and hitched".format(name))
-        deliverToys()
     print("\t\tReindeer {} ends".format(name))
 
 def sleepSanta():
     time.sleep(random.uniform(TIME_SLEEP_SANTA,TIME_SLEEP_SANTA+2))
 
-def deliverToys():
-    time.sleep(random.uniform(TIME_DELIVER,TIME_DELIVER+2))
-
-
 def work():
     time.sleep(random.uniform(TIME_WORK,TIME_WORK+2))
-
 
 def getHelp():
     time.sleep(TIME_HELP)
@@ -130,11 +121,10 @@ def helpElf():
     time.sleep(TIME_HELP)
 
 def loadToys():
-    time.sleep(random.uniform(TIME_LOAD,TIME_LOAD+2))
-
+    time.sleep(TIME_LOAD)
 
 def holidays():
-    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+2))
+    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+8))
 
 
 def main():
