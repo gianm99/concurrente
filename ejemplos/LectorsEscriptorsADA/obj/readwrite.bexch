@@ -1,0 +1,23 @@
+[GENERATED OBJECT FILE]
+b__readwrite.o
+[PROJECT FILES]
+C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\lectorsescriptors.gpr
+20191213085148
+[BOUND OBJECT FILES]
+C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\obj\def_monitor.o
+C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\obj\readwrite.o
+[GENERATED SOURCE FILES]
+b__readwrite.ads
+b__readwrite.adb
+b__readwrite.ali
+[RESULTING OPTIONS]
+-LC:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\obj\
+-LC:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\obj\
+-LC:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/
+-static
+-static-libgcc
+C:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/libgnarl.a
+C:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/libgnat.a
+-Xlinker
+--stack=0x200000,0x1000
+-mthreads
