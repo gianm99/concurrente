@@ -5,10 +5,14 @@ package def_monitor is
       procedure levantarse;
       entry comer;
       procedure darComida;
+      procedure dormir;
+      function esperando return Boolean;
+      function dormidos return Boolean;
    private
       sillas: integer := 4;
-      esperandoComida: integer := 0;
-      comidaPreparada: integer := 0;
+      enanos_esperando: integer := 0;
+      enanos_dormidos: integer := 0;
+      comida: integer := 0;
    end monitor;
 
 end def_monitor;
