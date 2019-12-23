@@ -27,15 +27,19 @@ package body def_monitor is
          enanos_dormidos:=enanos_dormidos+1;
       end dormir;
 
-      function esperando return Boolean is
+      function esperando return integer is
       begin
-         return enanos_esperando>0;
+         return enanos_esperando;
       end esperando;
 
-      function dormidos return Boolean is
+      function dormidos return integer is
       begin
-         return enanos_dormidos=7;
+         return enanos_dormidos;
       end dormidos;
 
+      function sillas_libres return integer is
+      begin
+         return sillas;
+      end sillas_libres;
    end monitor;
 end def_monitor;

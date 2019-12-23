@@ -43,7 +43,7 @@ package body ada_main is
    E196 : Short_Integer; pragma Import (Ada, E196, "system__tasking__protected_objects_E");
    E202 : Short_Integer; pragma Import (Ada, E202, "system__tasking__protected_objects__entries_E");
    E214 : Short_Integer; pragma Import (Ada, E214, "system__tasking__queuing_E");
-   E220 : Short_Integer; pragma Import (Ada, E220, "system__tasking__stages_E");
+   E222 : Short_Integer; pragma Import (Ada, E222, "system__tasking__stages_E");
    E194 : Short_Integer; pragma Import (Ada, E194, "def_monitor_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
@@ -304,7 +304,7 @@ package body ada_main is
       System.Tasking.Queuing'Elab_Body;
       E214 := E214 + 1;
       System.Tasking.Stages'Elab_Body;
-      E220 := E220 + 1;
+      E222 := E222 + 1;
       E194 := E194 + 1;
    end adainit;
 

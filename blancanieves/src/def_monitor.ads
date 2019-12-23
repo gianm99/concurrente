@@ -6,8 +6,9 @@ package def_monitor is
       entry comer;
       procedure darComida;
       procedure dormir;
-      function esperando return Boolean;
-      function dormidos return Boolean;
+      function esperando return integer;
+      function dormidos return integer;
+      function sillas_libres return integer;
    private
       sillas: integer := 4;
       enanos_esperando: integer := 0;

@@ -38,9 +38,11 @@ procedure blancanieves is
          -- COME
          m.comer;
          Put_Line("-----------------> "& mi_nombre'img & " come!!!");
+         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
          delay Duration(1.5);
          -- SE LEVANTA DE LA SILLA
          m.levantarse;
+         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
       end loop;
       -- SE VA A DORMIR
       m.dormir;
@@ -50,16 +52,16 @@ procedure blancanieves is
    task body tarea_blancanieves is
    begin
       accept Start;
-      while not(m.dormidos) loop
+      while m.dormidos<7 loop
          -- COMPRUEBA SI HAY ENANOS ESPERANDO PARA COMER
-         while m.esperando loop
+         while m.esperando>0 loop
             -- MIENTRAS HAYA ENANOS ESPERANDO REPARTE COMIDA
             Put_Line("BLANCANIEVES cocina para un enano");
             delay Duration(0.5);
             m.darComida;
          end loop;
          -- SALE A PASEAR
-         Put_Line("BLANCANIEVES se va a pasear");
+         Put_Line("BLANCANIEVES se va a pasear <-----------------");
          delay Duration(1.5);
       end loop;
       -- SE VA A DORMIR

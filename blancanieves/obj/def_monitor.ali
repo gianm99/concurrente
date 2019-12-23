@@ -15,7 +15,7 @@ RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 RV MAX_PROTECTED_ENTRIES=2
 
-U def_monitor%b		def_monitor.adb		8b9de8ef NE OO PK IL
+U def_monitor%b		def_monitor.adb		9d1fb94a NE OO PK IL
 Z ada.tags%s		a-tags.adb		a-tags.ali
 Z system%s		system.ads		system.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
@@ -23,7 +23,7 @@ Z system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
 Z system.tasking.protected_objects.entries%s  s-tpoben.adb  s-tpoben.ali
 Z system.tasking.protected_objects.operations%s  s-tpobop.adb  s-tpobop.ali
 
-U def_monitor%s		def_monitor.ads		372fad55 EE NE OO PK IL
+U def_monitor%s		def_monitor.ads		9eb4a30e EE NE OO PK IL
 Z ada.exceptions%s	a-except.adb		a-except.ali
 Z ada.tags%s		a-tags.adb		a-tags.ali
 Z system%s		system.ads		system.ali
@@ -37,8 +37,8 @@ D a-finali.ads		20180524051738 bf4f806b ada.finalization%s
 D a-stream.ads		20180524051736 119b8fb3 ada.streams%s
 D a-tags.ads		20180524051738 491b781d ada.tags%s
 D a-unccon.ads		20180524051738 0e9b276f ada.unchecked_conversion%s
-D def_monitor.ads	20191223225858 372fad55 def_monitor%s
-D def_monitor.adb	20191223225926 bcb245ba def_monitor%b
+D def_monitor.ads	20191223233030 9eb4a30e def_monitor%s
+D def_monitor.adb	20191223233056 03ab1a44 def_monitor%b
 D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
 D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
@@ -65,19 +65,20 @@ D s-traent.ads		20180524051736 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20180524051736 34867c83 system.unsigned_types%s
 D s-win32.ads		20180524051736 b7f96285 system.win32%s
 X 7 def_monitor.ads
-1K9*def_monitor 18l5 18e16 8|1b14 41l5 41t16
-3W19*monitor 12E7 16l8 16e15 8|2b19 40l8 40t15
+1K9*def_monitor 19l5 19e16 8|1b14 45l5 45t16
+3W19*monitor 13E7 17l8 17e15 8|2b19 44l8 44t15
 4Y13 sentarse 8|3b13 7l11 7t19
 5U17 levantarse 8|9b17 12l11 12t21
 6Y13 comer 8|14b13 18l11 18t16
 7U17 darComida 8|20b17 23l11 23t20
 8U17 dormir 8|25b17 28l11 28t17
-9V16 esperando{boolean} 8|30b16 33l11 33t20
-10V16 dormidos{boolean} 8|35b16 38l11 38t19
-12i7 sillas{integer} 8|3r27 5r10 5r20 11r10 11r20
-13i7 enanos_esperando{integer} 8|6r10 6r28 17r10 17r28 32r17
-14i7 enanos_dormidos{integer} 8|27r10 27r27 37r17
-15i7 comida{integer} 8|14r24 16r10 16r20 22r10 22r20
+9V16 esperando{integer} 8|30b16 33l11 33t20
+10V16 dormidos{integer} 8|35b16 38l11 38t19
+11V16 sillas_libres{integer} 8|40b16 43l11 43t24
+13i7 sillas{integer} 8|3r27 5r10 5r20 11r10 11r20 42r17
+14i7 enanos_esperando{integer} 8|6r10 6r28 17r10 17r28 32r17
+15i7 enanos_dormidos{integer} 8|27r10 27r27 37r17
+16i7 comida{integer} 8|14r24 16r10 16r20 22r10 22r20
 X 22 s-stausa.ads
 203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
 268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
