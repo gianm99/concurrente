@@ -28,8 +28,8 @@ elves_list = {"Chaenath", "Elrond", "Hycis", "Imryll", "Galadriel",
 
 TIME_SLEEP_SANTA = 1
 TIME_LOAD = 1
-TIME_HOLIDAYS = 7
-TIME_DELIVER = 4
+TIME_HOLIDAYS = 4
+TIME_DELIVER = 2
 TIME_WORK = 1
 TIME_HELP = 1
 
@@ -109,10 +109,10 @@ def reindeer():
     print("\t\tReindeer {} ends".format(name))
 
 def sleepSanta():
-    time.sleep(random.uniform(TIME_SLEEP_SANTA,TIME_SLEEP_SANTA+2))
+    time.sleep(random.uniform(TIME_SLEEP_SANTA,TIME_SLEEP_SANTA+1))
 
 def work():
-    time.sleep(random.uniform(TIME_WORK,TIME_WORK+2))
+    time.sleep(random.uniform(TIME_WORK,TIME_WORK+1))
 
 def getHelp():
     time.sleep(TIME_HELP)
@@ -124,7 +124,7 @@ def loadToys():
     time.sleep(TIME_LOAD)
 
 def holidays():
-    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+8))
+    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+5))
 
 
 def main():

@@ -56,16 +56,16 @@ procedure blancanieves is
          Put_Line("BLANCANIEVES se va a pasear");
          delay Duration(1.5);
       end loop;
-      Put_Line("BLANCANIEVES se va a dormir");
+      Put_Line("BLANCANIEVES se va a DORMIR");
    end tarea_blancanieves;
 
    -----------------------------
    --  Tareas
    -----------------------------
-   type Enanos is array (nombres_enanos) of tarea_enano;
-   e:Enanos;
    type Blancanieves is new tarea_blancanieves;
    b: Blancanieves;
+   type Enanos is array (nombres_enanos) of tarea_enano;
+   e:Enanos;
 begin
    -- Empezar todas las tareas
    b.Start; -- Blancanieves
