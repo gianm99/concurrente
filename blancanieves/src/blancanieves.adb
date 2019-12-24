@@ -3,6 +3,7 @@ use Ada.Text_IO,Ada.Integer_Text_IO,def_monitor,Ada.Strings.Unbounded;
 
 procedure blancanieves is
    type nombres_enanos is(SABIO,GRUNON,FELIZ,DORMILON,TIMIDO,MOCOSO,TONTIN);
+   MAX: constant Integer:=2;
    -----------------------------
    --  Tipo protegido para la SC
    -----------------------------
@@ -23,26 +24,20 @@ procedure blancanieves is
    -----------------------------
    task body tarea_enano is
       mi_nombre : nombres_enanos;
-      max: integer := 2;
    begin
       accept Start (nombre: in nombres_enanos) do
          mi_nombre:=nombre;
       end Start;
-      for I in 1..max loop
-         -- VA A TRABAJAR
+      for I in 1..MAX loop
          Put_Line(mi_nombre'img & " va a trabajar a la mina");
          delay Duration(4.0);
-         -- SE SIENTA EN UNA SILLA
          m.sentarse;
          Put_Line(mi_nombre'img & " se sienta");
-         -- COME
          m.comer;
          Put_Line("-----------------> "& mi_nombre'img & " come!!!");
          delay Duration(1.5);
-         -- SE LEVANTA DE LA SILLA
          m.levantarse;
       end loop;
-      -- SE VA A DORMIR
       m.dormir;
       Put_Line(mi_nombre'img & " se va a DORMIR ");
    end tarea_enano;
@@ -51,31 +46,28 @@ procedure blancanieves is
    begin
       accept Start;
       while not(m.dormidos) loop
-         -- COMPRUEBA SI HAY ENANOS ESPERANDO PARA COMER
          while m.esperando loop
-            -- MIENTRAS HAYA ENANOS ESPERANDO REPARTE COMIDA
             Put_Line("BLANCANIEVES cocina para un enano");
             delay Duration(0.5);
             m.darComida;
          end loop;
-         -- SALE A PASEAR
          Put_Line("BLANCANIEVES se va a pasear");
          delay Duration(1.5);
       end loop;
-      -- SE VA A DORMIR
-      Put_Line("BLANCANIEVES se va a dormir");
+      Put_Line("BLANCANIEVES se va a DORMIR");
    end tarea_blancanieves;
 
    -----------------------------
-   --  Array de enanos
+   --  Tareas
    -----------------------------
-   type Enanos is array (nombres_enanos) of tarea_enano;
-   e:Enanos;
    type Blancanieves is new tarea_blancanieves;
    b: Blancanieves;
+   type Enanos is array (nombres_enanos) of tarea_enano;
+   e:Enanos;
 begin
-   b.Start; -- Empieza Blancanieves
+   -- Empezar todas las tareas
+   b.Start; -- Blancanieves
    for I in e'Range loop
-      e(I).Start(I);
+      e(I).Start(I); -- Enanos
    end loop;
 end blancanieves;

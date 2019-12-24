@@ -29,7 +29,7 @@ RV MAX_TASK_ENTRIES=1
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U blancanieves%b	blancanieves.adb	6d7d8e45 NE OO SU IL
+U blancanieves%b	blancanieves.adb	0460c248 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
@@ -74,8 +74,8 @@ D a-tags.ads		20180524051738 491b781d ada.tags%s
 D a-textio.ads		20180524051738 881db35a ada.text_io%s
 D a-tiinio.ads		20180524051736 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051738 0e9b276f ada.unchecked_conversion%s
-D blancanieves.adb	20191223231820 a49cd0f1 blancanieves%b
-D def_monitor.ads	20191223225858 372fad55 def_monitor%s
+D blancanieves.adb	20191224093126 cd819cfc blancanieves%b
+D def_monitor.ads	20191224092350 372fad55 def_monitor%s
 D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
 D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
@@ -128,10 +128,10 @@ X 14 a-strunb.ads
 76K21*Unbounded 491e26 19|1w62 2r61
 X 16 a-textio.ads
 49K13*Text_IO 471e16 19|1w10 2r9
-263U14*Put_Line 19|33s10 37s10 40s10 47s7 57s13 62s10 66s7
+263U14*Put_Line 19|32s10 35s10 37s10 42s7 50s13 54s10 57s7
 X 19 blancanieves.adb
-4U11*blancanieves 4b11 81l5 81t17
-5E9 nombres_enanos 5e76 14r30 25r19 28r32 72r26
+4U11*blancanieves 4b11 72l5 72t17
+5E9 nombres_enanos 5e76 15r30 26r19 28r32 65r26
 5n27 SABIO{5E9}
 5n33 GRUNON{5E9}
 5n40 FELIZ{5E9}
@@ -139,31 +139,31 @@ X 19 blancanieves.adb
 5n55 TIMIDO{5E9}
 5n62 MOCOSO{5E9}
 5n69 TONTIN{5E9}
-9w4 m{20|3W19} 36r10 39r10 43r10 46r7 53r17 55r16 59r13
-13T14 tarea_enano 15l8 15e19 24b14 48l8 48t19 72r45
-14Y13 Start 14>19 28b14 30l11 30t16 79s12
-14e19 nombre{5E9} 29r21
-17T14 tarea_blancanieves 19l8 19e26 50b14 67l8 67t26 74r29
-18Y13 Start 52b14 77s6
-25e7 mi_nombre{5E9} 29m10 33r19 37r19 40r42 47r16
-26i7 max{integer} 31r19
+6i4 MAX{integer} 31r19
+10w4 m{20|3W19} 34r10 36r10 39r10 41r7 48r17 49r16 52r13
+14T14 tarea_enano 16l8 16e19 25b14 43l8 43t19 65r45
+15Y13 Start 15>19 28b14 30l11 30t16 70s12
+15e19 nombre{5E9} 29r21
+18T14 tarea_blancanieves 20l8 20e26 45b14 58l8 58t26 63r29
+19Y13 Start 47b14 68s6
+26e7 mi_nombre{5E9} 29m10 32r19 35r19 37r42 42r16
 28e21 nombre{5E9}
 31i11 I{integer}
-72A9 Enanos(13T14)<5E9> 73r6
-73a4 e{72A9} 78r13 79r7
-74T9 Blancanieves<17T14> 75r7
-75t4 b{74T9} 77r4
-78e8 I{5E9} 79r9 79r18
+63T9 Blancanieves<18T14> 64r7
+64t4 b{63T9} 68r4
+65A9 Enanos(14T14)<5E9> 66r6
+66a4 e{65A9} 69r13 70r7
+69e8 I{5E9} 70r9 70r18
 X 20 def_monitor.ads
 1K9*def_monitor 19|1w38 2r37 20|18e16
-3W19*monitor 19|9r7 20|16e15
-4Y13 sentarse 19|36s12
-5U17 levantarse 19|43s12
-6Y13 comer 19|39s12
-7U17 darComida 19|59s15
-8U17 dormir 19|46s9
-9V16 esperando{boolean} 19|55s18
-10V16 dormidos{boolean} 19|53s19
+3W19*monitor 19|10r7 20|16e15
+4Y13 sentarse 19|34s12
+5U17 levantarse 19|39s12
+6Y13 comer 19|36s12
+7U17 darComida 19|52s15
+8U17 dormir 19|41s9
+9V16 esperando{boolean} 19|49s18
+10V16 dormidos{boolean} 19|48s19
 X 25 system.ads
 67M9*Address
 X 36 s-memory.ads
