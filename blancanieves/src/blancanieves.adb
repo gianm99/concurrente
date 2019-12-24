@@ -41,7 +41,7 @@ procedure blancanieves is
          Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
       end loop;
       m.dormir;
-      Put_Line(mi_nombre'img & " se va a DORMIR ");
+      Put_Line(mi_nombre'img & " se va a DORMIR " & m.dormidos'img & "/7");
    end tarea_enano;
 
    task body tarea_blancanieves is
