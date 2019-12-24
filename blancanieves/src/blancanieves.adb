@@ -24,6 +24,10 @@ procedure blancanieves is
    -----------------------------
    task body tarea_enano is
       mi_nombre : nombres_enanos;
+      procedure mostrar_estado is
+      begin
+         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
+      end mostrar_estado;
    begin
       accept Start (nombre: in nombres_enanos) do
          mi_nombre:=nombre;
@@ -34,11 +38,11 @@ procedure blancanieves is
          m.sentarse;
          Put_Line(mi_nombre'img & " se sienta");
          m.comer;
+         mostrar_estado;
          Put_Line("-----------------> "& mi_nombre'img & " come!!!");
-         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
          delay Duration(1.5);
          m.levantarse;
-         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
+         mostrar_estado;
       end loop;
       m.dormir;
       Put_Line(mi_nombre'img & " se va a DORMIR " & m.dormidos'img & "/7");
