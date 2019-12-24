@@ -53,7 +53,7 @@ procedure blancanieves is
             delay Duration(0.5);
             m.darComida;
          end loop;
-         Put_Line("BLANCANIEVES se va a pasear <-----------------");
+         Put_Line("BLANCANIEVES se va a pasear");
          delay Duration(1.5);
       end loop;
       Put_Line("BLANCANIEVES se va a dormir");
