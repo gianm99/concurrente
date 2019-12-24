@@ -67,6 +67,7 @@ procedure blancanieves is
    type Blancanieves is new tarea_blancanieves;
    b: Blancanieves;
 begin
+   -- Empezar todas las tareas
    b.Start; -- Blancanieves
    for I in e'Range loop
       e(I).Start(I); -- Enanos
