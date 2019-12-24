@@ -10,7 +10,15 @@
       <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\lectorsescriptors.gpr</vfs_project>
       <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\src\def_monitor.ads</vfs_file>
     </file_marker>
-    <file_marker current="true" column=" 1" line=" 1" >
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\lectorsescriptors.gpr</vfs_project>
+      <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\src\readwrite.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 3" line=" 6" >
+      <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\lectorsescriptors.gpr</vfs_project>
+      <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\src\readwrite.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 15" line=" 16" >
       <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\lectorsescriptors.gpr</vfs_project>
       <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\ejemplos\LectorsEscriptorsADA\src\readwrite.adb</vfs_file>
     </file_marker>
