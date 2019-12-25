@@ -1,34 +1,34 @@
 package main
 
 import (
+	"encoding/binary"
+	"fmt"
 	"log"
 	"math/rand"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/streadway/amqp"
 )
 
-func failOnError(err error, msg string) {
-	if err != nil {
-		log.Fatalf("%s: %s", msg, err)
-	}
+const maxOp = 8
+
+type transaccion struct {
+	permiso bool
+	balance int32
 }
 
-func randomString(l int) string {
-	bytes := make([]byte, l)
-	for i := 0; i < l; i++ {
-		bytes[i] = byte(randInt(65, 90))
-	}
-	return string(bytes)
+// Pasa la secuencia de bytes a una transacción
+func bytetotrans(arr []byte) transaccion {
+	permiso := int8(arr[0]) != 0
+	balance := int32(binary.LittleEndian.Uint32(arr[1:]))
+	return transaccion{permiso, balance}
 }
 
-func randInt(min int, max int) int {
-	return min + rand.Intn(max-min)
-}
-
-func operacionRPC(n int) (balance int, err error) {
+// operacionRPC intenta realizar una operación bancaria
+func operacionRPC(n int) (trans transaccion, err error) {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
@@ -60,27 +60,77 @@ func operacionRPC(n int) (balance int, err error) {
 
 	corrId := randomString(32)
 
+	// Mensaje para hacer la operacion
 	err = ch.Publish(
-		"",          // exchange
-		"rpc_queue", // routing key
-		false,       // mandatory
-		false,       // immediate
+		"",            // exchange
+		"operaciones", // routing key
+		false,         // mandatory
+		false,         // immediate
 		amqp.Publishing{
 			ContentType:   "text/plain",
 			CorrelationId: corrId,
 			ReplyTo:       q.Name,
-			Body:          []byte(strconv.Itoa(n)),
+			// Body:          []byte(strconv.Itoa(n)),
+			Body: []byte(strconv.Itoa(n)),
 		})
 	failOnError(err, "Failed to publish a message")
 
-	// FALTA TENER EN CUENTA LOS MENSAJES DE FALLO
 	for d := range msgs {
 		if corrId == d.CorrelationId {
-			balance, err = strconv.Atoi(string(d.Body))
-			failOnError(err, "Failed to convert body to integer")
+			trans = bytetotrans(d.Body)
 			break
 		}
 	}
 
 	return
+}
+
+func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	nombre := nombreFrom(os.Args)
+
+	fmt.Printf("Hola, mi nombre es : %s\n", nombre)
+	ops := randInt(1, maxOp)
+	fmt.Printf("%s quiere hacer %d operaciones\n", nombre, ops)
+	for i := 1; i <= ops; i++ {
+		cantidad := randInt(-10, +10)
+		fmt.Printf("%s operación %d: %d\n", nombre, i, cantidad)
+		trans, err := operacionRPC(cantidad)
+		failOnError(err, "Fallo al solicitar la operación")
+		fmt.Printf("Operación solicitada\n")
+		if trans.permiso {
+			fmt.Printf("Operación completada!\n")
+		} else {
+			fmt.Printf("NO PERMITIDA, NO HAY FONDOS\n")
+		}
+		fmt.Printf("Balance actual: %d\n", trans.balance)
+		fmt.Printf("%d", i)
+		fmt.Println(strings.Repeat("-", 30))
+	}
+}
+
+func nombreFrom(args []string) string {
+	if (len(args) < 2) || os.Args[1] == "" {
+		return "Cliente"
+	}
+	return args[1]
+}
+
+func randomString(l int) string {
+	bytes := make([]byte, l)
+	for i := 0; i < l; i++ {
+		bytes[i] = byte(randInt(65, 90))
+	}
+	return string(bytes)
+}
+
+func randInt(min int, max int) int {
+	return min + rand.Intn(max-min)
+}
+
+func failOnError(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %s", msg, err)
+	}
 }
