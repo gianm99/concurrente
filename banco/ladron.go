@@ -53,7 +53,6 @@ func main() {
 			time.Sleep(2 * time.Second)
 			fmt.Printf("El botín es de %d\n", int32(binary.LittleEndian.Uint32(d.Body)))
 			fmt.Printf("Me voy corriendo\n")
-			time.Sleep(5 * time.Second)
 		}
 	}()
 	<-forever
