@@ -6,7 +6,6 @@ import (
 	"log"
 	"math/rand"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -28,15 +27,16 @@ func bytetotrans(arr []byte) transaccion {
 }
 
 // operacionRPC intenta realizar una operación bancaria
-func operacionRPC(n int) (trans transaccion, err error) {
+func operacionRPC(cantidad int32) (trans transaccion, err error) {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
-	failOnError(err, "Failed to connect to RabbitMQ")
+	failOnError(err, "Fallo al conectar con RabbitMQ")
 	defer conn.Close()
 
 	ch, err := conn.Channel()
-	failOnError(err, "Failed to open a channel")
+	failOnError(err, "Fallo al abrir un canal")
 	defer ch.Close()
 
+	// Cola para respuestas del banquero
 	q, err := ch.QueueDeclare(
 		"",    // name
 		false, // durable
@@ -45,7 +45,7 @@ func operacionRPC(n int) (trans transaccion, err error) {
 		false, // noWait
 		nil,   // arguments
 	)
-	failOnError(err, "Failed to declare a queue")
+	failOnError(err, "Fallo al declarar una cola")
 
 	msgs, err := ch.Consume(
 		q.Name, // queue
@@ -56,10 +56,11 @@ func operacionRPC(n int) (trans transaccion, err error) {
 		false,  // no-wait
 		nil,    // args
 	)
-	failOnError(err, "Failed to register a consumer")
+	failOnError(err, "Fallo al registrar un consumidor")
 
 	corrId := randomString(32)
-
+	b := make([]byte, 4)
+	binary.LittleEndian.PutUint32(b, uint32(cantidad))
 	// Mensaje para hacer la operacion
 	err = ch.Publish(
 		"",            // exchange
@@ -70,10 +71,9 @@ func operacionRPC(n int) (trans transaccion, err error) {
 			ContentType:   "text/plain",
 			CorrelationId: corrId,
 			ReplyTo:       q.Name,
-			// Body:          []byte(strconv.Itoa(n)),
-			Body: []byte(strconv.Itoa(n)),
+			Body:          b,
 		})
-	failOnError(err, "Failed to publish a message")
+	failOnError(err, "Fallo al publicar un mensaje")
 
 	for d := range msgs {
 		if corrId == d.CorrelationId {
@@ -95,8 +95,12 @@ func main() {
 	fmt.Printf("%s quiere hacer %d operaciones\n", nombre, ops)
 	for i := 1; i <= ops; i++ {
 		cantidad := randInt(-10, +10)
+		// La cantidad no puede ser 0
+		for cantidad == 0 {
+			cantidad = randInt(-10, +10)
+		}
 		fmt.Printf("%s operación %d: %d\n", nombre, i, cantidad)
-		trans, err := operacionRPC(cantidad)
+		trans, err := operacionRPC(int32(cantidad))
 		failOnError(err, "Fallo al solicitar la operación")
 		fmt.Printf("Operación solicitada\n")
 		if trans.permiso {
