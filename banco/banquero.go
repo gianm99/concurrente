@@ -36,12 +36,12 @@ func Btoi(b bool) int8 {
 	return 0
 }
 
-func operacion(n int32) transaccion {
+func operacion(n int32) bool {
 	if (balance + n) < 0 {
-		return transaccion{false, balance}
+		return false
 	}
 	balance = balance + n
-	return transaccion{true, balance}
+	return true
 }
 
 func main() {
@@ -61,6 +61,17 @@ func main() {
 		false,         // exclusive
 		false,         // no-wait
 		nil,           // arguments
+	)
+	failOnError(err, "Fallo al declarar una cola")
+
+	// Cola para avisar al ladrón
+	ql, err := ch.QueueDeclare(
+		"avisos", // name
+		false,    // durable
+		false,    // delete when unused
+		false,    // exclusive
+		false,    // no-wait
+		nil,      // arguments
 	)
 	failOnError(err, "Fallo al declarar una cola")
 
@@ -90,11 +101,28 @@ func main() {
 			cantidad := int32(binary.LittleEndian.Uint32(d.Body))
 			fmt.Println(strings.Repeat(">", 30))
 			fmt.Printf("Operación recibida: %d\n", cantidad)
-			respuesta := operacion(cantidad)
-			if !respuesta.permiso {
+			permiso := operacion(cantidad)
+			if !permiso {
 				fmt.Printf("NO PERMITIDO, NO HAY FONDOS\n")
 			}
-			fmt.Printf("Balance: %d\n", respuesta.balance)
+			if balance >= avisoLadron {
+				// Avisar al ladrón
+				b := make([]byte, 4)
+				binary.LittleEndian.PutUint32(b, uint32(balance))
+
+				err = ch.Publish(
+					"",      // exchange
+					ql.Name, // routing key
+					false,   // mandatory
+					false,   // immediate
+					amqp.Publishing{
+						ContentType: "text/plain",
+						Body:        []byte(b),
+					})
+				failOnError(err, "Failed to publish a message")
+				balance = 0
+			}
+			fmt.Printf("Balance: %d\n", balance)
 
 			err = ch.Publish(
 				"",        // exchange
@@ -104,7 +132,7 @@ func main() {
 				amqp.Publishing{
 					ContentType:   "text/plain",
 					CorrelationId: d.CorrelationId,
-					Body:          transtobyte(respuesta),
+					Body:          transtobyte(transaccion{permiso, balance}),
 				})
 			failOnError(err, "Fallo al publicar un mensaje")
 			fmt.Println(strings.Repeat("<", 30))
