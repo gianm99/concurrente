@@ -5,7 +5,7 @@ import random
 
 TURNS = 6  # number of times Santa has to answer the elves' questions
 LOADS = 1  # number of times Santa has to load the toys
-wakeUp = threading.Semaphore(0)
+wakeUp = threading.Semaphore(0) # sleep until being woken up
 
 
 REINDEERS = 9  # number of reindeers
@@ -26,12 +26,12 @@ elfGroup = threading.Semaphore(1)  # permission to wait in a group
 elves_list = {"Chaenath", "Elrond", "Hycis", "Imryll", "Galadriel",
               "Arwen", "Tauriel", "Esiyae", "Legolas"}
 
-TIME_SLEEP_SANTA = 1
-TIME_LOAD = 1
-TIME_HOLIDAYS = 4
-TIME_DELIVER = 2
-TIME_WORK = 1
-TIME_HELP = 1
+TIME_SLEEP_SANTA = 1.5
+TIME_LOAD = 0.5
+TIME_HOLIDAYS = 8
+TIME_DELIVER = 1
+TIME_WORK = 0.5
+TIME_HELP = 0.5
 
 def santa():
     global reindeersWaiting, elvesWaiting
@@ -41,8 +41,8 @@ def santa():
     print("--------> Santa says: I'm tired")
     while turns < TURNS or loads < LOADS:
         print("--------> Santa says: I'm going to sleep")
-        wakeUp.acquire()
         sleepSanta()
+        wakeUp.acquire()
         print("--------> Santa says: I'm awake ho ho ho!")
         if reindeersWaiting == REINDEERS:
             print("--------> Santa says: Toys are ready!")
@@ -124,7 +124,7 @@ def loadToys():
     time.sleep(TIME_LOAD)
 
 def holidays():
-    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+5))
+    time.sleep(random.uniform(TIME_HOLIDAYS,TIME_HOLIDAYS+2))
 
 
 def main():
@@ -152,6 +152,4 @@ def main():
     for t in threads:
         t.join()
 
-
-if __name__ == "__main__":
-    main()
+main()
