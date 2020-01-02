@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Locations >
-  <Project >
+  <Project>
+    <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_file>
     <file_marker column=" 23" line=" 8" >
       <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_project>
       <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\src\def_monitor.ads</vfs_file>
