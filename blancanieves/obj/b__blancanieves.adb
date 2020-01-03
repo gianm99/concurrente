@@ -30,21 +30,17 @@ package body ada_main is
    E123 : Short_Integer; pragma Import (Ada, E123, "system__finalization_root_E");
    E121 : Short_Integer; pragma Import (Ada, E121, "ada__finalization_E");
    E120 : Short_Integer; pragma Import (Ada, E120, "system__file_io_E");
-   E186 : Short_Integer; pragma Import (Ada, E186, "system__storage_pools_E");
-   E182 : Short_Integer; pragma Import (Ada, E182, "system__finalization_masters_E");
-   E180 : Short_Integer; pragma Import (Ada, E180, "system__storage_pools__subpools_E");
-   E172 : Short_Integer; pragma Import (Ada, E172, "ada__strings__unbounded_E");
    E160 : Short_Integer; pragma Import (Ada, E160, "system__task_info_E");
    E008 : Short_Integer; pragma Import (Ada, E008, "ada__calendar_E");
    E006 : Short_Integer; pragma Import (Ada, E006, "ada__calendar__delays_E");
    E144 : Short_Integer; pragma Import (Ada, E144, "ada__real_time_E");
    E108 : Short_Integer; pragma Import (Ada, E108, "ada__text_io_E");
-   E206 : Short_Integer; pragma Import (Ada, E206, "system__tasking__initialization_E");
-   E196 : Short_Integer; pragma Import (Ada, E196, "system__tasking__protected_objects_E");
-   E202 : Short_Integer; pragma Import (Ada, E202, "system__tasking__protected_objects__entries_E");
-   E214 : Short_Integer; pragma Import (Ada, E214, "system__tasking__queuing_E");
-   E222 : Short_Integer; pragma Import (Ada, E222, "system__tasking__stages_E");
-   E194 : Short_Integer; pragma Import (Ada, E194, "def_monitor_E");
+   E184 : Short_Integer; pragma Import (Ada, E184, "system__tasking__initialization_E");
+   E174 : Short_Integer; pragma Import (Ada, E174, "system__tasking__protected_objects_E");
+   E180 : Short_Integer; pragma Import (Ada, E180, "system__tasking__protected_objects__entries_E");
+   E192 : Short_Integer; pragma Import (Ada, E192, "system__tasking__queuing_E");
+   E200 : Short_Integer; pragma Import (Ada, E200, "system__tasking__stages_E");
+   E172 : Short_Integer; pragma Import (Ada, E172, "def_monitor_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -55,7 +51,7 @@ package body ada_main is
 
    procedure finalize_library is
    begin
-      E202 := E202 - 1;
+      E180 := E180 - 1;
       declare
          procedure F1;
          pragma Import (Ada, F1, "system__tasking__protected_objects__entries__finalize_spec");
@@ -69,33 +65,12 @@ package body ada_main is
       begin
          F2;
       end;
-      E172 := E172 - 1;
       declare
          procedure F3;
-         pragma Import (Ada, F3, "ada__strings__unbounded__finalize_spec");
-      begin
-         F3;
-      end;
-      E180 := E180 - 1;
-      declare
-         procedure F4;
-         pragma Import (Ada, F4, "system__storage_pools__subpools__finalize_spec");
-      begin
-         F4;
-      end;
-      E182 := E182 - 1;
-      declare
-         procedure F5;
-         pragma Import (Ada, F5, "system__finalization_masters__finalize_spec");
-      begin
-         F5;
-      end;
-      declare
-         procedure F6;
-         pragma Import (Ada, F6, "system__file_io__finalize_body");
+         pragma Import (Ada, F3, "system__file_io__finalize_body");
       begin
          E120 := E120 - 1;
-         F6;
+         F3;
       end;
       declare
          procedure Reraise_Library_Exception_If_Any;
@@ -273,15 +248,6 @@ package body ada_main is
       E121 := E121 + 1;
       System.File_Io'Elab_Body;
       E120 := E120 + 1;
-      System.Storage_Pools'Elab_Spec;
-      E186 := E186 + 1;
-      System.Finalization_Masters'Elab_Spec;
-      System.Finalization_Masters'Elab_Body;
-      E182 := E182 + 1;
-      System.Storage_Pools.Subpools'Elab_Spec;
-      E180 := E180 + 1;
-      Ada.Strings.Unbounded'Elab_Spec;
-      E172 := E172 + 1;
       System.Task_Info'Elab_Spec;
       E160 := E160 + 1;
       Ada.Calendar'Elab_Spec;
@@ -296,16 +262,16 @@ package body ada_main is
       Ada.Text_Io'Elab_Body;
       E108 := E108 + 1;
       System.Tasking.Initialization'Elab_Body;
-      E206 := E206 + 1;
+      E184 := E184 + 1;
       System.Tasking.Protected_Objects'Elab_Body;
-      E196 := E196 + 1;
+      E174 := E174 + 1;
       System.Tasking.Protected_Objects.Entries'Elab_Spec;
-      E202 := E202 + 1;
+      E180 := E180 + 1;
       System.Tasking.Queuing'Elab_Body;
-      E214 := E214 + 1;
+      E192 := E192 + 1;
       System.Tasking.Stages'Elab_Body;
-      E222 := E222 + 1;
-      E194 := E194 + 1;
+      E200 := E200 + 1;
+      E172 := E172 + 1;
    end adainit;
 
    procedure Ada_Main_Program;

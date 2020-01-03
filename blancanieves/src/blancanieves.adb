@@ -1,13 +1,27 @@
-with Ada.Text_IO,Ada.Integer_Text_IO,def_monitor,Ada.Strings.Unbounded;
-use Ada.Text_IO,Ada.Integer_Text_IO,def_monitor,Ada.Strings.Unbounded;
+with Ada.Text_IO,Ada.Integer_Text_IO,def_monitor;
+use Ada.Text_IO,Ada.Integer_Text_IO,def_monitor;
 
 procedure blancanieves is
+   -- Enumerado de los nombres de los enanos
    type nombres_enanos is(SABIO,GRUNON,FELIZ,DORMILON,TIMIDO,MOCOSO,TONTIN);
+   -- Constante de veces que come un enano
    MAX: constant integer:=2;
    -----------------------------
    --  Tipo protegido para la SC
    -----------------------------
    m: monitor;
+   -----------------------------
+   --  Especificacion de procedimiento(s)
+   -----------------------------
+   procedure mostrar_estado;
+   -----------------------------
+   --  Cuerpo de procedimiento(s)
+   -----------------------------
+   procedure mostrar_estado is
+   begin
+      -- Muestra la cantidad de enanos esperando para comer y las sillas libres
+      Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
+   end mostrar_estado;
    -----------------------------
    --  Especificaciones de las tareas
    -----------------------------
@@ -24,14 +38,12 @@ procedure blancanieves is
    -----------------------------
    task body tarea_enano is
       mi_nombre : nombres_enanos;
-      procedure mostrar_estado is
-      begin
-         Put_Line("esperando = " & m.esperando'img & " sillas = " & m.sillas_libres'img);
-      end mostrar_estado;
    begin
+      -- Esperar a que se inicie la tarea y asignar el nombre
       accept Start (nombre: in nombres_enanos) do
          mi_nombre:=nombre;
       end Start;
+      -- Mientras le queden repeticiones por hacer
       for I in 1..MAX loop
          Put_Line(mi_nombre'img & " va a trabajar a la mina");
          delay Duration(4.0);
@@ -50,16 +62,22 @@ procedure blancanieves is
 
    task body tarea_blancanieves is
    begin
+      -- Esperar a que se inicie la tarea
       accept Start;
+      -- Mientras queden enanos despiertos
       while m.dormidos<7 loop
+         -- Mientras queden enanos esperando comida
          while m.esperando>0 loop
+            -- Cocina para un enano
             Put_Line("BLANCANIEVES cocina para un enano");
             delay Duration(0.5);
             m.darComida;
          end loop;
+         -- Se va a pasear cuando no hay enanos esperando para comer
          Put_Line("BLANCANIEVES se va a pasear");
          delay Duration(1.5);
       end loop;
+      -- Cuando estan dormidos los enanos, se va a dormir y acaba
       Put_Line("BLANCANIEVES se va a DORMIR");
    end tarea_blancanieves;
 

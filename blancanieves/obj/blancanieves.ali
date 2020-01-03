@@ -29,14 +29,12 @@ RV MAX_TASK_ENTRIES=1
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U blancanieves%b	blancanieves.adb	9e3a0763 NE OO SU IL
+U blancanieves%b	blancanieves.adb	3b8a978f NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
 Z ada.real_time%s	a-reatim.adb		a-reatim.ali
-W ada.strings%s		a-string.ads		a-string.ali
-W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
 Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W def_monitor%s		def_monitor.adb		def_monitor.ali
@@ -61,22 +59,17 @@ Z system.tasking.stages%s  s-tassta.adb		s-tassta.ali
 D ada.ads		20180524051736 76789da1 ada%s
 D a-calend.ads		20180524051738 372815c8 ada.calendar%s
 D a-caldel.ads		20180524051736 9f20b83d ada.calendar.delays%s
-D a-charac.ads		20180524051736 2d3ec45b ada.characters%s
-D a-chlat1.ads		20180524051736 66457d31 ada.characters.latin_1%s
 D a-except.ads		20180524051736 291912d5 ada.exceptions%s
 D a-finali.ads		20180524051738 bf4f806b ada.finalization%s
 D a-inteio.ads		20180524051738 f64b89a4 ada.integer_text_io%s
 D a-ioexce.ads		20180524051736 e4a01f64 ada.io_exceptions%s
 D a-reatim.ads		20180524051738 0240fc73 ada.real_time%s
 D a-stream.ads		20180524051736 119b8fb3 ada.streams%s
-D a-string.ads		20180524051736 90ac6797 ada.strings%s
-D a-strmap.ads		20180524051736 e8bb714a ada.strings.maps%s
-D a-strunb.ads		20180524051738 8098c91f ada.strings.unbounded%s
 D a-tags.ads		20180524051738 491b781d ada.tags%s
 D a-textio.ads		20180524051738 881db35a ada.text_io%s
 D a-tiinio.ads		20180524051736 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051738 0e9b276f ada.unchecked_conversion%s
-D blancanieves.adb	20191224112606 fe40578c blancanieves%b
+D blancanieves.adb	20200103100022 db680e7f blancanieves%b
 D def_monitor.ads	20191224111428 9eb4a30e def_monitor%s
 D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
@@ -84,14 +77,12 @@ D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20180524051736 e53d8b8e interfaces.c_streams%s
 D system.ads		20180524051738 32a08138 system%s
 D s-atacco.ads		20180524051738 4c36d12f system.address_to_access_conversions%s
-D s-atocou.ads		20180524051738 b45c2d8d system.atomic_counters%s
 D s-conca2.ads		20180524051736 02a0d7d0 system.concat_2%s
 D s-conca3.ads		20180524051738 0b705ca5 system.concat_3%s
 D s-conca4.ads		20180524051738 7e642b20 system.concat_4%s
 D s-crtl.ads		20180524051736 0ebbdb71 system.crtl%s
 D s-exctab.ads		20180524051738 54135002 system.exception_table%s
 D s-ficobl.ads		20180524051738 078245e4 system.file_control_block%s
-D s-finmas.ads		20180524051738 7811a767 system.finalization_masters%s
 D s-finroo.ads		20180524051738 4ff27390 system.finalization_root%s
 D s-imenne.ads		20180524051736 614c06c0 system.img_enum_new%s
 D s-imgint.ads		20180524051736 02dbe0c2 system.img_int%s
@@ -106,9 +97,6 @@ D s-stausa.ads		20180524051736 017a0a05 system.stack_usage%s
 D s-stalib.ads		20180524051738 09bd3940 system.standard_library%s
 D s-stalib.adb		20180524051736 f2fe2716 system.standard_library%b
 D s-stoele.ads		20180524051738 2dc34a04 system.storage_elements%s
-D s-stopoo.ads		20180524051736 b16154c2 system.storage_pools%s
-D s-stposu.ads		20180524051736 97a6219c system.storage_pools.subpools%s
-D s-stratt.ads		20180524051736 aedef97e system.stream_attributes%s
 D s-tasinf.ads		20180524051738 601f6b72 system.task_info%s
 D s-taspri.ads		20180524051738 6c1d93d4 system.task_primitives%s
 D s-taprop.ads		20180524051738 1dd2e1b6 system.task_primitives.operations%s
@@ -123,62 +111,58 @@ D s-unstyp.ads		20180524051736 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20180524051738 1b7d22d2 system.wch_con%s
 D s-win32.ads		20180524051736 b7f96285 system.win32%s
 X 1 ada.ads
-16K9*Ada 20e8 19|1r6 1r18 1r50 2r5 2r17 2r49
-X 8 a-inteio.ads
-18K13*Integer_Text_IO[17|46] 19|1w22 2r21
-X 12 a-string.ads
-16K13*Strings 35e16 19|1r54 2r53
-X 14 a-strunb.ads
-76K21*Unbounded 491e26 19|1w62 2r61
-X 16 a-textio.ads
-49K13*Text_IO 471e16 19|1w10 2r9
-263U14*Put_Line 19|29s10 36s10 39s10 42s10 48s7 56s13 60s10 63s7
-X 19 blancanieves.adb
-4U11*blancanieves 4b11 79l5 79t17
-5E9 nombres_enanos 5e76 15r30 26r19 32r32 71r26
-5n27 SABIO{5E9}
-5n33 GRUNON{5E9}
-5n40 FELIZ{5E9}
-5n46 DORMILON{5E9}
-5n55 TIMIDO{5E9}
-5n62 MOCOSO{5E9}
-5n69 TONTIN{5E9}
-6i4 MAX{integer} 35r19
-10w4 m{20|3W19} 29r36 29r69 38r10 40r10 44r10 47r7 48r53 54r13 55r16 58r13
-14T14 tarea_enano 16l8 16e19 25b14 49l8 49t19 71r45
-15Y13 Start 15>19 32b14 34l11 34t16 77s12
-15e19 nombre{5E9} 33r21
-18T14 tarea_blancanieves 20l8 20e26 51b14 64l8 64t26 69r29
-19Y13 Start 53b14 75s6
-26e7 mi_nombre{5E9} 33m10 36r19 39r19 42r42 48r16
-27U17 mostrar_estado 27b17 30l11 30t25 41s10 45s10
-32e21 nombre{5E9}
-35i11 I{integer}
-69T9 Blancanieves<18T14> 70r7
-70t4 b{69T9} 75r4
-71A9 Enanos(14T14)<5E9> 72r6
-72a4 e{71A9} 76r13 77r7
-76e8 I{5E9} 77r9 77r18
-X 20 def_monitor.ads
-1K9*def_monitor 19|1w38 2r37 20|19e16
-3W19*monitor 19|10r7 20|17e15
-4Y13 sentarse 19|38s12
-5U17 levantarse 19|44s12
-6Y13 comer 19|40s12
-7U17 darComida 19|58s15
-8U17 dormir 19|47s9
-9V16 esperando{integer} 19|29s38 55s18
-10V16 dormidos{integer} 19|48s55 54s15
-11V16 sillas_libres{integer} 19|29s71
-X 25 system.ads
+16K9*Ada 20e8 14|1r6 1r18 2r5 2r17
+X 6 a-inteio.ads
+18K13*Integer_Text_IO[12|46] 14|1w22 2r21
+X 11 a-textio.ads
+49K13*Text_IO 471e16 14|1w10 2r9
+263U14*Put_Line 14|23s7 48s10 51s10 54s10 60s7 72s13 77s10 81s7
+X 14 blancanieves.adb
+4U11*blancanieves 4b11 97l5 97t17
+6E9 nombres_enanos 6e76 29r30 40r19 43r32 89r26
+6n27 SABIO{6E9}
+6n33 GRUNON{6E9}
+6n40 FELIZ{6E9}
+6n46 DORMILON{6E9}
+6n55 TIMIDO{6E9}
+6n62 MOCOSO{6E9}
+6n69 TONTIN{6E9}
+8i4 MAX{integer} 47r19
+12w4 m{15|3W19} 23r33 23r66 50r10 52r10 56r10 59r7 60r53 68r13 70r16 74r13
+16U14 mostrar_estado 21b14 24l8 24t22 53s10 57s10
+28T14 tarea_enano 30l8 30e19 39b14 61l8 61t19 89r45
+29Y13 Start 29>19 43b14 45l11 45t16 95s12
+29e19 nombre{6E9} 44r21
+32T14 tarea_blancanieves 34l8 34e26 63b14 82l8 82t26 87r29
+33Y13 Start 66b14 93s6
+40e7 mi_nombre{6E9} 44m10 48r19 51r19 54r42 60r16
+43e21 nombre{6E9}
+47i11 I{integer}
+87T9 Blancanieves<32T14> 88r7
+88t4 b{87T9} 93r4
+89A9 Enanos(28T14)<6E9> 90r6
+90a4 e{89A9} 94r13 95r7
+94e8 I{6E9} 95r9 95r18
+X 15 def_monitor.ads
+1K9*def_monitor 14|1w38 2r37 15|19e16
+3W19*monitor 14|12r7 15|17e15
+4Y13 sentarse 14|50s12
+5U17 levantarse 14|56s12
+6Y13 comer 14|52s12
+7U17 darComida 14|74s15
+8U17 dormir 14|59s9
+9V16 esperando{integer} 14|23s35 70s18
+10V16 dormidos{integer} 14|60s55 68s15
+11V16 sillas_libres{integer} 14|23s68
+X 20 system.ads
 67M9*Address
-X 38 s-memory.ads
-53V13*Alloc{25|67M9} 103i<c,__gnat_malloc>22
+X 31 s-memory.ads
+53V13*Alloc{20|67M9} 103i<c,__gnat_malloc>22
 68U14*Free 104i<c,__gnat_free>22
-76V13*Realloc{25|67M9} 105i<c,__gnat_realloc>22
-X 45 s-stausa.ads
+76V13*Realloc{20|67M9} 105i<c,__gnat_realloc>22
+X 38 s-stausa.ads
 203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
 268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
-X 47 s-stalib.adb
+X 40 s-stalib.adb
 93U14 Break_Start 94i<c,__gnat_break_start>22
 
