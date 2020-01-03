@@ -1,14 +1,21 @@
 <?xml version="1.0"?>
 <Locations >
-  <Project>
-    <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_file>
-    <file_marker column=" 23" line=" 8" >
+  <Project >
+    <file_marker column=" 23" line=" 10" >
       <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_project>
       <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\src\def_monitor.ads</vfs_file>
     </file_marker>
-    <file_marker current="true" column=" 1" line=" 29" >
+    <file_marker column=" 1" line=" 37" >
       <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_project>
       <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\src\def_monitor.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 43" >
+      <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_project>
+      <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\src\blancanieves.adb</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 11" >
+      <vfs_project>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\blancanieves.gpr</vfs_project>
+      <vfs_file>C:\Users\gianm\Documents\3-INFO\PC\programas\blancanieves\src\blancanieves.adb</vfs_file>
     </file_marker>
   </Project>
 </Locations>

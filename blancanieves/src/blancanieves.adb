@@ -1,3 +1,5 @@
+-- Autor: Gian Lucas Martin Chamorro
+-- Enlace: https://youtu.be/7UQQAyvB-dE
 with Ada.Text_IO,Ada.Integer_Text_IO,def_monitor;
 use Ada.Text_IO,Ada.Integer_Text_IO,def_monitor;
 

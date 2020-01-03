@@ -1,3 +1,5 @@
+-- Autor: Gian Lucas Martín Chamorro
+-- Enlace: https://youtu.be/7UQQAyvB-dE
 package def_monitor is
 
    protected type monitor is

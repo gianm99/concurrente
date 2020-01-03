@@ -1,3 +1,5 @@
+-- Autor: Gian Lucas Martín Chamorro
+-- Enlace: https://youtu.be/7UQQAyvB-dE
 package body def_monitor is
    protected body monitor is
       entry sentarse when sillas > 0 is

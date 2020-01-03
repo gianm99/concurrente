@@ -34,6 +34,7 @@ func main() {
 	)
 	failOnError(err, "Fallo al declarar una cola")
 
+	// Se declara consumidor de la cola de avisos del banquero
 	msgs, err := ch.Consume(
 		ql.Name, // queue
 		"",      // consumer
@@ -48,21 +49,28 @@ func main() {
 	forever := make(chan bool)
 	fmt.Printf("Hola, mi nombre es: Señor %s\n", color)
 	go func() {
+		// Cada vez que le llegue un aviso del banquero, el ladrón roba al banco
 		for d := range msgs {
 			fmt.Printf("¡Esto es un atraco, por menos de 20 no me muevo de aquí!\n")
+			// Roba el banco y consigue su botín
 			time.Sleep(2 * time.Second)
+			// Pasa el botín de secuencia de bytes a uint32 a int32
 			fmt.Printf("El botín es de %d\n", int32(binary.LittleEndian.Uint32(d.Body)))
 			fmt.Printf("Me voy corriendo\n")
+			// Se espera antes de poder volver a robar el banco
+			time.Sleep(6 * time.Second)
 		}
 	}()
 	<-forever
 }
 
+//randNombre genera un nombre aleatorio para el ladrón
 func randNombre() string {
 	colores := [6]string{"Marrón", "Rubio", "Rosa", "Blanco", "Naranja", "Azul"}
 	return colores[rand.Intn(len(colores)-1)]
 }
 
+// failOnError imprime un mensaje de error si ha habido algún error
 func failOnError(err error, msg string) {
 	if err != nil {
 		log.Fatalf("%s: %s", msg, err)
