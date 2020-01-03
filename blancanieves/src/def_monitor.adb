@@ -9,7 +9,7 @@ package body def_monitor is
 
       procedure levantarse is
       begin
-         -- Queda una silla libre
+         -- Se libera una silla
          sillas := sillas + 1;
       end levantarse;
 

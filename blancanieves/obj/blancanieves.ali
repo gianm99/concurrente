@@ -69,8 +69,8 @@ D a-tags.ads		20180524051738 491b781d ada.tags%s
 D a-textio.ads		20180524051738 881db35a ada.text_io%s
 D a-tiinio.ads		20180524051736 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20180524051738 0e9b276f ada.unchecked_conversion%s
-D blancanieves.adb	20200103100022 db680e7f blancanieves%b
-D def_monitor.ads	20191224111428 9eb4a30e def_monitor%s
+D blancanieves.adb	20200103100212 db680e7f blancanieves%b
+D def_monitor.ads	20200103100618 9eb4a30e def_monitor%s
 D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
 D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
@@ -129,7 +129,7 @@ X 14 blancanieves.adb
 6n69 TONTIN{6E9}
 8i4 MAX{integer} 47r19
 12w4 m{15|3W19} 23r33 23r66 50r10 52r10 56r10 59r7 60r53 68r13 70r16 74r13
-16U14 mostrar_estado 21b14 24l8 24t22 53s10 57s10
+16U14 mostrar_estado 20b14 24l8 24t22 53s10 57s10
 28T14 tarea_enano 30l8 30e19 39b14 61l8 61t19 89r45
 29Y13 Start 29>19 43b14 45l11 45t16 95s12
 29e19 nombre{6E9} 44r21
@@ -144,8 +144,8 @@ X 14 blancanieves.adb
 90a4 e{89A9} 94r13 95r7
 94e8 I{6E9} 95r9 95r18
 X 15 def_monitor.ads
-1K9*def_monitor 14|1w38 2r37 15|19e16
-3W19*monitor 14|12r7 15|17e15
+1K9*def_monitor 14|1w38 2r37 15|23e16
+3W19*monitor 14|12r7 15|21e15
 4Y13 sentarse 14|50s12
 5U17 levantarse 14|56s12
 6Y13 comer 14|52s12
