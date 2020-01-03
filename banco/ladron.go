@@ -1,3 +1,5 @@
+// Autor: Gian Lucas Martín Chamorro
+// Enlace: https://youtu.be/wqvhszSn-7k
 package main
 
 import (

@@ -1,3 +1,5 @@
+// Autor: Gian Lucas Martín Chamorro
+// Enlace: https://youtu.be/wqvhszSn-7k
 package main
 
 import (
@@ -106,11 +108,11 @@ func main() {
 	fmt.Printf("%s quiere hacer %d operaciones\n", nombre, ops)
 	for i := 1; i <= ops; i++ {
 		// Cantidad aleatoria a ingresar o retirar
-		cantidad := randInt(-10, +10)
+		cantidad := randInt(-15, +15)
 		// La cantidad no puede ser 0
 		for cantidad == 0 {
 			// Mientras la cantidad sea 0 se vuelve a escoger otra cantidad
-			cantidad = randInt(-10, +10)
+			cantidad = randInt(-15, +15)
 		}
 		fmt.Printf("%s operación %d: %d\n", nombre, i, cantidad)
 		// Se envía la operación al banquero
