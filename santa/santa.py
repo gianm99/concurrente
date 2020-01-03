@@ -1,4 +1,5 @@
-# Gian Lucas Martín Chamorro
+# Autor: Gian Lucas Martín Chamorro
+# Vídeo: https://youtu.be/u2MhrgO5pbw
 import threading
 import time
 import random
@@ -42,26 +43,33 @@ def santa():
     while turns < TURNS or loads < LOADS:
         print("--------> Santa says: I'm going to sleep")
         sleepSanta()
+		# Espera a ser despertado
         wakeUp.acquire()
         print("--------> Santa says: I'm awake ho ho ho!")
         if reindeersWaiting == REINDEERS:
             print("--------> Santa says: Toys are ready!")
             print("--------> Santa loads the toys")
+			# Libera a cada reno y le carga los juguetes
             for i in range(REINDEERS):
                 reindeers.release()
                 loadToys()
+			# No queda ningún reno esperando
             reindeersWaiting = 0
             print("--------> Santa says: Until next Christmas!")
+			# Se libera al grupo para que se puedan poner a esperar otra vez
             reindeersGroup.release()
             loads += 1
         else:
             print("--------> Santa says: What is the problem?")
+			# Libera a los tres elfos y los ayuda
             for i in range(ELF_GROUP):
                 print("--------> Santa is helping the elf {} of 3".format(i+1))
                 elves.release()
                 helpElf()
+			# No queda ningun elfo del grupo esperando
             elvesWaiting = 0
             print("--------> Santa ends turn {}".format(turns+1))
+			# Se libera al grupo para que se puedan poner a esperar otros 3 elfos
             elfGroup.release()
             turns += 1
     print("--------> Santa ends")
@@ -77,11 +85,14 @@ def elf():
         elfGroup.acquire()
         elvesWaiting += 1
         if elvesWaiting < 3:
+			# Si no es el tercero libera el semáforo
             print("Elf {} says: I have a question, I'm the {} waiting...".format(name, elvesWaiting))
             elfGroup.release()
         else:
+			# Si es el tercero no libera el semáforo y despierta a Santa
             print("Elf {} says: I have a question, I'm the 3 waiting SANTAAA!".format(name))
             wakeUp.release()
+		# Espera a que le atienda Santa
         elves.acquire()
         print("The elf {} is getting help".format(name))
         getHelp()
@@ -98,11 +109,14 @@ def reindeer():
         reindeersGroup.acquire()
         reindeersWaiting += 1
         if reindeersWaiting < 9:
+			# Si no es el noveno libera el semáforo
             reindeersGroup.release()
             print("\t\tReindeer {} arrives".format(name))
         else:
+			# Si es el noveno no libera el semáforo y despierta a Santa 
             print("\t\tReindeer {} I'm the 9".format(name))
             wakeUp.release()
+		# Espera a que le atienda Santa
         reindeers.acquire()
         loadToys()
         print("\t\t{} ready and hitched".format(name))
