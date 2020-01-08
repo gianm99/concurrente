@@ -1,0 +1,18 @@
+integer array[N] number=[0,..,0]
+boolean array[N] choosing=[false,..,false]
+p{
+	loop{
+		non-critical section
+		choosing[i]=true
+		number[i]=1+max(number)
+		choosing[i]=false
+		for all other processes j{
+			await choosing[j]==0
+			await (number[j]==0) or (number[i]<<number[j])
+		}
+		critical section
+		number[i]=0
+	}
+}
+
+// number[i]<<number[j] es equivalente a number[i]<number[j] or (number[i]==number[j] and i<j) 

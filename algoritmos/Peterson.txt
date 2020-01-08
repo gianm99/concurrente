@@ -1,0 +1,25 @@
+boolean wantp=false, wantq=false
+integer last=1
+
+p{
+	loop{
+		non-critical section
+		wantp=true
+		last=1
+		await wantq==false or last==2
+		critical section
+		last=1
+		wantp=false 
+	}
+}
+q{
+	loop{
+		non-critical section
+		wantq=true
+		last=2
+		await wantp==false or last==1
+		critical section
+		last=2
+		wantq=false 
+	}
+}

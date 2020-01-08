@@ -1,0 +1,26 @@
+integer gate1=0, gate2=0
+boolean want[N]=[false,..,false]
+
+p{
+p1:	gate1=p
+	wantp=true
+	if gate2!=0{
+		wantp=false
+		goto p1
+	}
+	gate2=p
+	if gate1!=p{
+		wantp=false
+		for all other processes j{
+			await want[j]=false
+		}
+		if gate2!=p{
+			goto p1
+		}else{
+			wantp=true
+		}
+	}
+	critical section
+	gate2=0
+	wantp=false
+}

@@ -1,0 +1,36 @@
+boolean wantp=false, wantq=false
+integer turn=1
+
+p{
+	loop{	
+		non-critical section
+		wantp=true
+		while wantq{
+			if turn==2{
+				wantp=false
+				await turn==1
+				wantp=true
+			}
+		}
+		critical section
+		turn=2
+		wantp=false
+	}
+}
+
+q{
+	loop{	
+		non-critical section
+		wantq=true
+		while wantp{
+			if turn==1{
+				wantq=false
+				await turn==2
+				wantq=true
+			}
+		}
+		critical section
+		turn=1
+		wantq=false
+	}
+}
