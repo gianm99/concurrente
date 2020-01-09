@@ -1,0 +1,11 @@
+number=0
+turn=0
+
+lock{
+	current=getAndAdd(number,1)
+	while current!=turn
+}
+
+unlock{
+	getAndAdd(turn,1)
+}

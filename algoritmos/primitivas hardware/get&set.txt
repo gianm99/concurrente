@@ -1,0 +1,8 @@
+mutex=0
+lock{
+	while getAndSet(mutex,1)!=0
+}
+
+unlock{
+	mutex=0
+}

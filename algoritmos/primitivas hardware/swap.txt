@@ -1,0 +1,12 @@
+mutex=0
+
+lock{
+	local=1
+	while local!=0{
+		swap(mutex,local)
+	}
+}
+
+unlock{
+	mutex=0
+}

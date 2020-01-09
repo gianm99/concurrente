@@ -1,0 +1,12 @@
+mutex=0
+
+lock{
+	local=0
+	while compareAndSwap(mutex,local,1)==0{
+		local=0	// por si otro proceso ha cambiado el valor
+	}
+}
+
+unlock{
+	mutex=0
+}
