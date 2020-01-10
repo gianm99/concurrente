@@ -1,0 +1,15 @@
+planType finalPlan, receivedPlan
+planType set plan
+
+plan.append({chooseAttackOrRetreat})
+
+do t+1 times{
+	for all other generals G{
+	send(G,plan)
+	}
+	for all other generals G{
+		receive(receivedPlan)
+		plan.append(receivedPlan)
+	}
+}
+finalPlan=majority(plan)

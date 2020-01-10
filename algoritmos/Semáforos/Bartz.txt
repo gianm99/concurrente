@@ -1,0 +1,23 @@
+mutex S=1
+mutex gate=1
+integer count=K		// contador del multiplex
+
+p{
+	loop{
+		non-critical section
+		wait(gate)
+		wait(S)
+		count=count-1
+		if count>0{
+			signal(gate)
+		}
+		signal(S)
+		critical section
+		wait(S)
+		count=count+1
+		if count==1{
+			signal(gate)
+		}
+		signal(S)
+	}
+}

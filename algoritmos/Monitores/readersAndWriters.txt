@@ -1,0 +1,48 @@
+monitor RW{
+	integer readers=0
+	integer writers=0
+	condition OKtoRead, OKtoWrite
+	
+	StartRead(){
+		if writers!=0 or not empty(OKtoWrite){
+			waitC(OKtoRead)
+		}
+		readers=readers+1
+		signalC(OKtoRead)
+	}
+
+	EndRead(){
+		readers=readers-1
+		if readers==0{
+			signalC(OKtoWrite)
+		}
+	}
+
+	StartWrite(){
+		if writers!=0 or readers!=0{
+			waitC(OKtoWrite)
+		}
+		writers=writers+1
+	}
+
+	EndWrite(){
+		writers=writers-1
+		if empty(OKtoRead){
+			signalC(OKtoWrite)
+		}else{
+			signalC(OKtoRead)
+		}
+	}
+}
+
+reader{
+	RW.StartRead
+	read
+	RW.EndRead
+}
+
+writer{
+	RW.StartWrite
+	write
+	RW.EndWrite
+}

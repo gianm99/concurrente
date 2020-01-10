@@ -1,0 +1,59 @@
+normalNode{
+	integer array[incoming] inDeficit=[0,..,0]
+	integer inDeficit=0
+	integer outDeficit=0
+	integer parent=-1
+
+	sendMessage{
+		when parent!=-1{
+			send(message,destination,myID)
+			outDeficit++
+		}
+	}
+
+	receiveMessage{
+		receive(message,source)
+		if parent==-1{
+			parent=source
+		}
+		inDeficit[source]++
+		inDeficit++
+	}
+
+	sendSignal{
+		when inDeficit>1{
+			E<-some edge E for wich (inDeficit[E]>1) or (inDeficit[E]==1 and E!=parent)
+			send(signal,E,myID)
+			inDeficit[E]--
+			inDeficit--
+		}or when inDeficit==1 and isTerminated and outDeficit==0{
+			send(signal,parent,myID)
+			inDeficit[parent]==0
+			inDeficit==0
+			parent=-1
+		}
+	}
+
+	receiveSignal{
+		receive(signal,_)
+		outDeficit--
+	}
+}
+
+envNode{
+	integer outDeficit=0
+	
+	computation{
+		for all outgoing edges E{
+			send(message,E,myID)
+			outDeficit++
+		}
+		await outDeficit==0
+		announce system termination
+	}
+
+	receiveSignal{
+		receive(signal,source)
+		outDeficit--
+	}
+}

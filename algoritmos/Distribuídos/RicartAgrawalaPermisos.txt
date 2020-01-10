@@ -1,0 +1,35 @@
+integer myNum=0
+set of Node IDs deferred=empty set
+integer highestNum=0
+boolean requestCS=false
+
+main{
+	loop{
+		non-critical section
+		requestCS=true
+		myNum=highestNum+1
+		for all other nodes N{
+			send(request,N,myID,myNum)
+		}
+		await replies from all other nodes
+		critical section
+		requestCS=false
+		for all other nodes N in deferred{
+			remove N from deferred
+			send(reply,N,myID)
+		}
+	}
+}
+
+receive{
+	integer source, requestedNum
+	loop{
+		receive(request,source,requestedNum)
+		highestNum=max(highestNum,requestedNum)
+		if not requestCS or requestedNum<<myNum{
+			send(reply,N,myID)
+		}else{
+			add source to deferred
+		}
+	}
+}

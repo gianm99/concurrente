@@ -1,0 +1,18 @@
+infinite queue of dataType buffer=empty queue
+semaphore notEmpty= (0,0)
+
+producer{
+	loop{
+		d=produce()
+		append(d,buffer)
+		signal(notEmpty)
+	}
+}
+
+consumer{
+	loop{
+		wait(notEmpty)
+		d=take(buffer)
+		consume(d)
+	}
+}

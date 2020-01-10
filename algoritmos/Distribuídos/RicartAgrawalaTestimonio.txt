@@ -1,0 +1,45 @@
+boolean haveToken=true in node 0, false in others
+integer array [NODES] requested=[0,..,0]
+integer array [NODES] granted=[0,..,0]
+integer myNum=0
+boolean inCS=false
+
+sendToken(){
+	if exists N such that requested[N]>granted[N]{
+		for some such N{
+			send(token,N,granted)
+			haveToken=false
+			break
+		}
+	}
+}
+
+main(){
+	loop{
+		non-critical section
+		if not haveToken{
+			myNum=myNum+1
+			for all other nodes N{
+				send(request,N,myId,myNum)
+			}
+			receive(token,granted)
+			haveToken=true
+		}
+		inCS=true
+		critical section
+		granted[myId]=myNum
+		inCS=false
+		sendToken()
+	}
+}
+
+receiver(){
+	integer source, reqNum
+	loop{
+		receive(request,source,reqNum)
+		requested[source]=max(requested[source],reqNum)
+		if haveToken and not inCS{
+			sendToken()
+		}
+	}
+}

@@ -1,0 +1,19 @@
+chan dataType buffer=make(chan dataType)		// síncrono
+chan dataType buffer=make(chan dataType,size)	// asíncrono
+
+
+producer{
+	dataType D
+	loop{
+		D=produce()
+		buffer<-D
+	}
+}
+
+consumer{
+	dataType D
+	loop{
+		D<-buffer
+		consume(D)
+	}
+}

@@ -1,0 +1,26 @@
+planType finalPlan
+planType array[GENERALS] plan, majorityPlan
+planType array[GENERALS,GENERALS] reportedPlan
+
+plan[myID]=chooseAttackOrRetreat
+for all other generals G{
+	send(G,myID,plan[myID])
+}
+for all other generals G{
+	receive(G,plan[G])
+}
+for all other generals G{
+	for all other generals G' except G{
+		send(G',myID,G,plan[G])
+	}
+}
+for all other generals G{
+	for all other generals G' except G{
+		receive(G',reportedPlan[G,G'])
+	}
+}
+for all other generals G{
+	majorityPlan[G]=majority(plan[G] U reportedPlan[*,G])
+}
+majorityPlan[myID]=plan[myID]
+finalPlan=majority(majorityPlan)

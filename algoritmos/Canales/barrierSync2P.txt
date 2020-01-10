@@ -1,0 +1,16 @@
+ch_a=make(chan bool)
+ch_b=make(chan bool)
+
+a{
+	...
+	ch_a<-true
+	<-ch_b
+	...
+}
+
+b{
+	...
+	<-ch_a
+	ch_b<-true
+	...
+}

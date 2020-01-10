@@ -1,0 +1,25 @@
+monitor Sem{
+	integer s=k
+	condition notZero
+	
+	wait{
+		while s==0{
+			waitC(notZero)
+		}
+		s=s-1
+	}
+
+	signal{
+		s=s+1
+		signalC(notZero)
+	}
+}
+
+p{
+	loop{
+		non-critical section
+		Sem.wait
+		critical section
+		Sem.signal
+	}
+}

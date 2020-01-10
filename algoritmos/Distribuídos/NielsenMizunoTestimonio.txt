@@ -1,0 +1,40 @@
+integer parent=(initialized to form a tree)
+integer deferred=0
+boolean holding=true in root, false in others
+
+main(){
+	loop{
+		non-critical section
+		if not holding{
+			send(request,parent,myID,myID)	// sender & originator
+			parent=0
+			receive(token)
+		}
+		holding=false
+		critical section
+		if deferred!=0{
+			send(token,deferred)
+			deferred=0
+		}else{
+			holding=true
+		}
+	}
+}
+
+receiver(){
+	integer source, originator
+	loop{
+		receive(request,source,originator)
+		if parent=0{
+			if holding{
+				send(token,originator)
+				holding=false
+			}else{
+				deferred=originator
+			}
+		}else{
+			send(request,parent,myID,originator)
+		}
+		parent=source
+	}
+}

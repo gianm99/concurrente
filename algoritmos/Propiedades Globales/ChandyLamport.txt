@@ -1,0 +1,32 @@
+integer array[outgoing] lastSent=[0,..,0]
+integer array[incoming] lastReceived=[0,..,0]
+integer array[outgoing] stateAtRecord=[-1,..,-1]
+integer array[incoming] messageAtRecord=[-1,..,-1]
+integer array[incoming] messageAtMarker=[-1,..,-1]
+
+sendMessage(){
+	send(message,destination,myID)
+	lastSent[destination]=message
+}
+
+receiveMessage(){
+	receive(message,source)
+	lastReceived[source]=message
+}
+
+receiveMarker(){
+	receive(marker,source)
+	messageAtMarker[source]=lastReceived[source]
+	if stateAtRecord=[-1,..-1]{
+		stateAtRecord=lastSent
+		messageAtRecord=lastReceived
+		for all outgoing edges E{
+			send(marker,E,myID)
+		}
+	}
+}
+
+recordState(){
+	await markers received on all incoming edges
+	recordState
+}

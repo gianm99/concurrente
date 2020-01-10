@@ -1,0 +1,33 @@
+monitor ForkMonitor{
+	integer array[N] fork=[2,..,2]
+	condition array[N] OKtoEat
+
+	takeForks(integer i){
+		if fork[i]!=2{
+			waitC(OKtoEat[i])
+		}
+		fork[i+1]=fork[i+1]-1
+		fork[i-1]=fork[i-1]-1
+	}
+
+	releaseForks(integer i){
+		fork[i+1]=fork[i+1]+1
+		fork[i-1]=fork[i-1]+1
+		if(fork[i+1]==2){
+			signalC(OKtoEat[i+1])
+		}
+		if(fork[i-1]==2){
+			signalC(OKtoEat[i-1])
+		}
+	}
+
+}
+
+philosopher(integer i){
+	loop{
+		think()
+		takeForks(i)
+		eat()
+		releaseForks(i)
+	}
+}

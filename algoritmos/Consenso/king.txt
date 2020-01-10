@@ -1,0 +1,29 @@
+planType finalPlan, myMajority, kingPlan
+planType array[generals] plan
+integer votesMajority
+
+plan[myID]=chooseAttackOrRetreat
+do two times{
+	for all other generals G{
+		send(G,myID,plan[myID])
+	}
+	for all other generals G{
+		receive(G,plan[G])
+	}
+	myMajority=majority(plan)
+	votesMajority= votes in favor of myMajority
+	if myTurn to be king{
+		for all other generals G{
+			send(G,myID,myMajority)
+		}
+		plan[myID]=myMajority
+	}else{
+		receive(G,kingPlan)
+		if votesMajority>3{
+			plan[myID]=myMajority
+		}else{
+			plan[myID]=kingPlan
+		}
+	}
+}
+finalPlan=plan[myID]

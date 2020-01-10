@@ -1,0 +1,35 @@
+semaphore mutex=1
+semaphore array[N] sync=[0,..,0]
+string array[N] status=[THINK,..,THINK]
+
+philosopher{
+	loop{
+		think()
+		take_forks(i)
+		eat()
+		drop_forks(i)
+	}
+}
+
+take_forks(i){
+	wait(mutex)
+	status[i]=HUNGRY
+	can_eat(i)
+	signal(mutex)
+	wait(sync)
+}
+
+drop_forks(i){
+	wait(mutex)
+	status[i]=THINK
+	can_eat(i-1)
+	can_eat(i+1)
+	signal(mutex)
+}
+
+can_eat(i){
+	if(status[i]=HUNGRY and status[i-1] and status[i+1] is not EAT){
+		status[i]=EAT
+		signal(sync[i])
+	}
+}

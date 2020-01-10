@@ -1,0 +1,39 @@
+monitor PC{
+	bufferType buffer=empty
+	condition notEmpty
+	condition notFull
+	
+	append(dataType V){
+		if buffer is full{
+			waitC(notFull)
+		}
+		append(V,buffer)
+		signalC(notEmpty)
+	}
+
+	take(){
+		dataType W
+		if buffer is empty{
+			waitC(notEmpty)
+		}
+		W=take(buffer)
+		signalC(notFull)
+		return W
+	}
+}
+
+producer{
+	dataType D
+	loop{
+		D=produce()
+		PC.append(D)
+	}
+}
+
+consumer{
+	dataType D
+	loop{
+		D=PC.take()
+		consume(D)
+	}
+}
