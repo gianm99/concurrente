@@ -4,7 +4,7 @@ p{
 	loop{
 		non-critical section
 		np=nq+1
-		await nq=0 or np<=nq	// prioridad para p
+		await nq==0 or np<=nq	// prioridad para p
 		critical section
 		np=0
 	}
@@ -14,7 +14,7 @@ q{
 	loop{	
 		non-critical section
 		nq=np+1
-		await np=0 or nq<np
+		await np==0 or nq<np
 		critical section
 		nq=0
 	}

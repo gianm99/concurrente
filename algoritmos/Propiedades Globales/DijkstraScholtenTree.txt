@@ -28,8 +28,8 @@ normalNode{
 			inDeficit--
 		}or when inDeficit==1 and isTerminated and outDeficit==0{
 			send(signal,parent,myID)
-			inDeficit[parent]==0
-			inDeficit==0
+			inDeficit[parent]=0
+			inDeficit=0
 			parent=-1
 		}
 	}
